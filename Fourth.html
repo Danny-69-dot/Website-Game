@@ -19,13 +19,9 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
         #result {
             font-weight: bold;
+            margin-top: 20px;
         }
         #slider {
             width: 100%;
@@ -37,6 +33,12 @@
             margin-top: 10px;
             font-weight: bold;
         }
+        .cold {
+            color: black;
+        }
+        .hot {
+            color: black;
+        }
     </style>
 </head>
 <body>
@@ -45,43 +47,55 @@
         <input type="range" id="slider" min="1" max="100" value="1">
         <p>Angka saat ini: <span id="slider-value">1</span></p>
         <div class="labels">
-            <span>Dingin</span>
-            <span>Panas</span>
+            <span id="cold" class="cold">Dingin</span>
+            <span id="hot" class="hot">Panas</span>
         </div>
-        <button type="button" onclick="checkSlider()">Cek</button>
         <p id="result"></p>
     </div>
 
     <script>
         const slider = document.getElementById('slider');
         const sliderValue = document.getElementById('slider-value');
+        const result = document.getElementById('result');
+        const coldLabel = document.getElementById('cold');
+        const hotLabel = document.getElementById('hot');
         let timer;
         let isCorrect = false;
 
         slider.addEventListener('input', () => {
-            sliderValue.textContent = slider.value;
-            if (slider.value == 15) {
+            const value = slider.value;
+            sliderValue.textContent = value;
+
+            // Update gradient colors based on proximity to 15
+            const hotIntensity = Math.min((value - 15) * 17, 255);
+            const coldIntensity = Math.min((15 - value) * 17, 255);
+
+            if (value == 15) {
+                coldLabel.style.color = 'black';
+                hotLabel.style.color = 'red';
                 if (!timer) {
                     timer = setTimeout(() => {
                         isCorrect = true;
+                        result.textContent = 'Bener!';
+                        window.location.href = 'https://danny-69-dot.github.io/Website-Game/third.html';
                     }, 3000); // 3 seconds
                 }
             } else {
                 clearTimeout(timer);
                 timer = null;
                 isCorrect = false;
+                result.textContent = 'Salah!';
+
+                // Adjust colors with gradient
+                if (value < 15) {
+                    coldLabel.style.color = `rgb(0, 0, ${coldIntensity})`; // Blue gradient
+                    hotLabel.style.color = 'black';
+                } else {
+                    hotLabel.style.color = `rgb(${hotIntensity}, 0, 0)`; // Red gradient
+                    coldLabel.style.color = 'black';
+                }
             }
         });
-
-        function checkSlider() {
-            if (isCorrect) {
-                document.getElementById('result').textContent = 'Bener!';
-                // Redirect to your desired link (e.g., replace example.com with your actual link)
-                window.location.href = 'https://danny-69-dot.github.io/Website-Game/third.html';
-            } else {
-                document.getElementById('result').textContent = 'Salah!';
-            }
-        }
     </script>
 </body>
 </html>
