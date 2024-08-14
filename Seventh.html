@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        #email-input {
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Apa emailnya Mr.kris?</h1>
+        <input type="email" id="email-input" placeholder="Enter email address">
+        <button type="button" onclick="checkEmail()">Cek</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function checkEmail() {
+            const userEmail = document.getElementById('email-input').value;
+            const correctEmail = 'kristanton17@gmail.com';
+
+            if (userEmail.toLowerCase() === correctEmail) {
+                document.getElementById('result').textContent = 'Bener!';
+                window.location.href = 'https://danny-69-dot.github.io/Website-Game/Sixth.html';
+            } else {
+                document.getElementById('result').textContent = 'Salah!';
+            }
+        }
+    </script>
+</body>
+</html>
