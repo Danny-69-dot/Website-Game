@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        #result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>berapa 20+30+40+50-(7.0x½)x7x(0+8)÷7x5</h1>
+        <form id="code-form">
+            <input type="text" id="code-input" placeholder="Enter code">
+            <button type="button" onclick="checkCode()">Cek</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function checkCode() {
+            const userCode = document.getElementById('code-input').value;
+            const correctCode = '0'; // Replace with your actual correct code
+
+            if (userCode.toLowerCase() === correctCode) {
+                document.getElementById('result').textContent = 'Bener!';
+                // Redirect to your desired link (e.g., replace example.com with your actual link)
+                window.location.href = 'https://danny-69-dot.github.io/Website-Game/Second.html';
+            } else {
+                document.getElementById('result').textContent = 'Salah!';
+            }
+        }
+    </script>
+</body>
+</html>
