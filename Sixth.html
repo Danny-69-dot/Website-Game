@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        #time-input {
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jam berapa pelajaran dimulai?</h1>
+        <input type="time" id="time-input">
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const timeInput = document.getElementById('time-input');
+        const result = document.getElementById('result');
+        let timer;
+
+        timeInput.addEventListener('input', () => {
+            clearTimeout(timer);
+            const userTime = timeInput.value;
+            const correctTime = '07:00';
+
+            if (userTime === correctTime) {
+                timer = setTimeout(() => {
+                    result.textContent = 'Bener!';
+                    window.location.href = 'https://danny-69-dot.github.io/Website-Game/Fifth.html';
+                }, 3000); // Wait 3 seconds before redirect
+            } else {
+                timer = setTimeout(() => {
+                    result.textContent = 'Salah!';
+                }, 3000); // Wait 3 seconds before showing incorrect message
+            }
+        });
+    </script>
+</body>
+</html>
