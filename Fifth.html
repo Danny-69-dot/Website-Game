@@ -19,46 +19,85 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
         #result {
             font-weight: bold;
             margin-top: 20px;
-        }
-        #date-input {
-            width: 100%;
-            padding: 10px;
-            margin: 20px 0;
-            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Berapa ulang tahun jesen?</h1>
-        <input type="date" id="date-input">
+        <select id="year">
+            <!-- Year options from 1900 to 2100 -->
+            <option value="">Tahun</option>
+            <script>
+                for (let year = 1900; year <= 2100; year++) {
+                    document.write(`<option value="${year}">${year}</option>`);
+                }
+            </script>
+        </select>
+        <select id="month">
+            <!-- Month options -->
+            <option value="">Bulan</option>
+            <option value="01">Januari</option>
+            <option value="02">Februari</option>
+            <option value="03">Maret</option>
+            <option value="04">April</option>
+            <option value="05">Mei</option>
+            <option value="06">Juni</option>
+            <option value="07">Juli</option>
+            <option value="08">Agustus</option>
+            <option value="09">September</option>
+            <option value="10">Oktober</option>
+            <option value="11">November</option>
+            <option value="12">Desember</option>
+        </select>
+        <select id="day">
+            <!-- Day options -->
+            <option value="">Tanggal</option>
+            <script>
+                for (let day = 1; day <= 31; day++) {
+                    document.write(`<option value="${day < 10 ? '0' + day : day}">${day < 10 ? '0' + day : day}</option>`);
+                }
+            </script>
+        </select>
         <p id="result"></p>
     </div>
 
     <script>
-        const dateInput = document.getElementById('date-input');
+        const yearSelect = document.getElementById('year');
+        const monthSelect = document.getElementById('month');
+        const daySelect = document.getElementById('day');
         const result = document.getElementById('result');
-        let timer;
 
-        dateInput.addEventListener('input', () => {
-            clearTimeout(timer);
-            const userDate = new Date(dateInput.value);
-            const correctDate = new Date('2012-08-04');
+        function checkDate() {
+            const year = yearSelect.value;
+            const month = monthSelect.value;
+            const day = daySelect.value;
 
-            if (userDate.getTime() === correctDate.getTime()) {
-                timer = setTimeout(() => {
+            if (year && month && day) {
+                const userDate = new Date(`${year}-${month}-${day}`);
+                const correctDate = new Date('2012-08-04');
+
+                if (userDate.getTime() === correctDate.getTime()) {
                     result.textContent = 'Bener!';
                     window.location.href = 'https://danny-69-dot.github.io/Website-Game/Fourth.html';
-                }, 3000); // Wait 3 seconds before redirect
-            } else {
-                timer = setTimeout(() => {
+                } else {
                     result.textContent = 'Salah!';
-                }, 3000); // Wait 3 seconds before showing incorrect message
+                }
             }
-        });
+        }
+
+        yearSelect.addEventListener('change', checkDate);
+        monthSelect.addEventListener('change', checkDate);
+        daySelect.addEventListener('change', checkDate);
     </script>
 </body>
 </html>
