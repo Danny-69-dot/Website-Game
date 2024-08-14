@@ -27,18 +27,6 @@
             width: 100%;
             margin: 20px 0;
         }
-        .labels {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        .cold {
-            color: black;
-        }
-        .hot {
-            color: black;
-        }
     </style>
 </head>
 <body>
@@ -46,10 +34,6 @@
         <h1>Pilih angka kesukaan jesen</h1>
         <input type="range" id="slider" min="1" max="100" value="1">
         <p>Angka saat ini: <span id="slider-value">1</span></p>
-        <div class="labels">
-            <span id="cold" class="cold">Dingin</span>
-            <span id="hot" class="hot">Panas</span>
-        </div>
         <p id="result"></p>
     </div>
 
@@ -57,43 +41,22 @@
         const slider = document.getElementById('slider');
         const sliderValue = document.getElementById('slider-value');
         const result = document.getElementById('result');
-        const coldLabel = document.getElementById('cold');
-        const hotLabel = document.getElementById('hot');
         let timer;
-        let isCorrect = false;
 
         slider.addEventListener('input', () => {
-            const value = slider.value;
-            sliderValue.textContent = value;
-
-            // Update gradient colors based on proximity to 15
-            const hotIntensity = Math.min((value - 15) * 17, 255);
-            const coldIntensity = Math.min((15 - value) * 17, 255);
-
-            if (value == 15) {
-                coldLabel.style.color = 'black';
-                hotLabel.style.color = 'red';
+            sliderValue.textContent = slider.value;
+            if (slider.value == 15) {
                 if (!timer) {
                     timer = setTimeout(() => {
-                        isCorrect = true;
                         result.textContent = 'Bener!';
-                        window.location.href = 'https://danny-69-dot.github.io/Website-Game/third.html';
+                        // Redirect to the next page after correct number is held for 3 seconds
+                        window.location.href = 'https://danny-69-dot.github.io/Website-Game/Last.html';
                     }, 3000); // 3 seconds
                 }
             } else {
                 clearTimeout(timer);
                 timer = null;
-                isCorrect = false;
                 result.textContent = 'Salah!';
-
-                // Adjust colors with gradient
-                if (value < 15) {
-                    coldLabel.style.color = `rgb(0, 0, ${coldIntensity})`; // Blue gradient
-                    hotLabel.style.color = 'black';
-                } else {
-                    hotLabel.style.color = `rgb(${hotIntensity}, 0, 0)`; // Red gradient
-                    coldLabel.style.color = 'black';
-                }
             }
         });
     </script>
