@@ -1,32 +1,60 @@
+### Code Verification HTML Example
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You Won!</title>
+    <title>Code Verification</title>
     <style>
         body {
-            background-color: #ffcc00; /* Choose your desired background color */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
+            padding: 0;
         }
-        .message {
-            font-size: 24px;
-            color: white;
-            text-align: center;
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
             padding: 20px;
-            background-color: #333; /* Choose a contrasting color for the message */
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        #result {
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="message">
-        <p>YOU WON! 🎉</p>
+    <div class="container">
+        <h1>Code Verification</h1>
+        <form id="code-form">
+            <input type="text" id="code-input" placeholder="Enter code">
+            <button type="button" onclick="checkCode()">Verify</button>
+        </form>
+        <p id="result"></p>
     </div>
+
+    <script>
+        function checkCode() {
+            const userCode = document.getElementById('code-input').value;
+            const correctCode = 'yoas'; // Replace with your actual correct code
+
+            if (userCode.toLowerCase() === correctCode) {
+                document.getElementById('result').textContent = 'Code is correct!';
+                // Redirect to your desired link (e.g., replace example.com with your actual link)
+                window.location.href = 'https://example.com';
+            } else {
+                document.getElementById('result').textContent = 'Jawab yang bener!';
+            }
+        }
+    </script>
 </body>
 </html>
