@@ -31,10 +31,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>Code Verification</h1>
+        <h1>Apa nama server temenmu?(no emoji)</h1>
         <form id="code-form">
             <input type="text" id="code-input" placeholder="Enter code">
-            <button type="button" onclick="checkCode()">Verify</button>
+            <button type="button" onclick="checkCode()">Cek</button>
         </form>
         <p id="result"></p>
     </div>
@@ -42,14 +42,14 @@
     <script>
         function checkCode() {
             const userCode = document.getElementById('code-input').value;
-            const correctCode = 'yoas'; // Replace with your actual correct code
+            const correctCode = 'cccc'; // Replace with your actual correct code
 
             if (userCode.toLowerCase() === correctCode) {
-                document.getElementById('result').textContent = 'Code is correct!';
+                document.getElementById('result').textContent = 'Bener!';
                 // Redirect to your desired link (e.g., replace example.com with your actual link)
-                window.location.href = 'https://example.com';
+                window.location.href = 'https://danny-69-dot.github.io/Website-Game/Last.html';
             } else {
-                document.getElementById('result').textContent = 'Jawab yang bener!';
+                document.getElementById('result').textContent = 'Salah!';
             }
         }
     </script>
