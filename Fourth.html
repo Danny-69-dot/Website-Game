@@ -26,6 +26,27 @@
         #slider {
             width: 100%;
             margin: 20px 0;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 15px;
+            background: linear-gradient(to right, blue, red);
+            outline: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        #slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+        #slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: #4CAF50;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -41,15 +62,25 @@
         const slider = document.getElementById('slider');
         const sliderValue = document.getElementById('slider-value');
         const result = document.getElementById('result');
+        const correctNumber = 15;
         let timer;
 
+        function updateGradient(value) {
+            const percentage = Math.abs((value - correctNumber) / 85) * 100;
+            const gradientColor = `linear-gradient(to right, blue ${100 - percentage}%, red ${percentage}%)`;
+            slider.style.background = gradientColor;
+        }
+
         slider.addEventListener('input', () => {
-            sliderValue.textContent = slider.value;
-            if (slider.value == 15) {
+            const value = parseInt(slider.value);
+            sliderValue.textContent = value;
+
+            updateGradient(value);
+
+            if (value == correctNumber) {
                 if (!timer) {
                     timer = setTimeout(() => {
                         result.textContent = 'Bener!';
-                        // Redirect to the next page after correct number is held for 3 seconds
                         window.location.href = 'https://danny-69-dot.github.io/Website-Game/third.html';
                     }, 3000); // 3 seconds
                 }
@@ -59,6 +90,8 @@
                 result.textContent = 'Salah!';
             }
         });
+
+        updateGradient(slider.value);
     </script>
 </body>
 </html>
