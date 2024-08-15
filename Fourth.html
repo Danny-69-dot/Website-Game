@@ -24,34 +24,32 @@
             margin-top: 20px;
         }
         #slider {
-            width: 100%;
-            margin: 20px 0;
             -webkit-appearance: none;
-            appearance: none;
-            height: 10px;
-            background-color: #ddd;
+            width: 100%;
+            height: 15px;
+            background: linear-gradient(to right, darkblue, blue, yellow, orange, red, darkred);
+            border-radius: 10px;
             outline: none;
             opacity: 0.7;
             transition: opacity 0.2s;
-            border-radius: 5px;
         }
         #slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background: darkblue;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.2s;
         }
         #slider::-moz-range-thumb {
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background: darkblue;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.2s;
         }
     </style>
 </head>
@@ -67,53 +65,49 @@
         const slider = document.getElementById('slider');
         const sliderValue = document.getElementById('slider-value');
         const result = document.getElementById('result');
-        const correctNumber = 69; // Set the correct number here
-        let timer;
-
-        function updateThumbColor(value) {
-            const distance = Math.abs(value - correctNumber);
-            let thumbColor;
-
-            if (distance >= 75) {
-                thumbColor = `rgb(0, 0, 139)`; // Dark Blue
-            } else if (distance >= 50) {
-                thumbColor = `rgb(0, 0, 255)`; // Blue
-            } else if (distance >= 35) {
-                thumbColor = `rgb(255, 255, 0)`; // Yellow
-            } else if (distance >= 25) {
-                thumbColor = `rgb(255, 165, 0)`; // Orange
-            } else if (distance >= 10) {
-                thumbColor = `rgb(255, 0, 0)`; // Red
-            } else {
-                thumbColor = `rgb(139, 0, 0)`; // Dark Red
-            }
-
-            slider.style.setProperty('--thumb-color', thumbColor);
-            slider.style.background = `linear-gradient(90deg, ${thumbColor} 100%, #ddd 0%)`;
-            slider.style.backgroundClip = 'content-box';
-        }
+        const correctNumber = 69;
 
         slider.addEventListener('input', () => {
             const value = parseInt(slider.value);
             sliderValue.textContent = value;
 
-            updateThumbColor(value);
-
-            if (value == correctNumber) {
-                if (!timer) {
-                    timer = setTimeout(() => {
-                        result.textContent = 'Bener!';
-                        window.location.href = 'https://danny-69-dot.github.io/Website-Game/third.html';
-                    }, 3000); // 3 seconds
+            if (value >= correctNumber) {
+                const diff = Math.abs(correctNumber - value);
+                if (diff <= 0) {
+                    slider.style.background = "darkred";
+                    slider.style.setProperty('--thumb-color', 'darkred');
+                } else if (diff <= 10) {
+                    slider.style.background = "red";
+                    slider.style.setProperty('--thumb-color', 'red');
+                } else if (diff <= 25) {
+                    slider.style.background = "orange";
+                    slider.style.setProperty('--thumb-color', 'orange');
+                } else if (diff <= 35) {
+                    slider.style.background = "yellow";
+                    slider.style.setProperty('--thumb-color', 'yellow');
+                } else if (diff <= 50) {
+                    slider.style.background = "blue";
+                    slider.style.setProperty('--thumb-color', 'blue');
+                } else {
+                    slider.style.background = "darkblue";
+                    slider.style.setProperty('--thumb-color', 'darkblue');
                 }
             } else {
-                clearTimeout(timer);
-                timer = null;
+                slider.style.background = "darkblue";
+                slider.style.setProperty('--thumb-color', 'darkblue');
+            }
+
+            slider.style.background = `linear-gradient(to right, darkblue ${correctNumber * 100 / 500}%, darkred ${correctNumber * 100 / 500}%)`;
+
+            if (value == correctNumber) {
+                result.textContent = 'Bener!';
+                setTimeout(() => {
+                    window.location.href = 'https://danny-69-dot.github.io/Website-Game/third.html';
+                }, 3000); // Redirect after 3 seconds
+            } else {
                 result.textContent = 'Salah!';
             }
         });
-
-        updateThumbColor(slider.value);
     </script>
 </body>
 </html>
