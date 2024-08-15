@@ -41,7 +41,7 @@
             width: 25px;
             height: 25px;
             border-radius: 50%;
-            background: blue;
+            background: darkblue;
             cursor: pointer;
             transition: background 0.3s;
         }
@@ -49,7 +49,7 @@
             width: 25px;
             height: 25px;
             border-radius: 50%;
-            background: blue;
+            background: darkblue;
             cursor: pointer;
             transition: background 0.3s;
         }
@@ -58,7 +58,7 @@
 <body>
     <div class="container">
         <h1>Pilih angka kesukaan jesen</h1>
-        <input type="range" id="slider" min="1" max="500" value="1">
+        <input type="range" id="slider" min="1" max="500" value="500">
         <p>Angka saat ini: <span id="slider-value">1</span></p>
         <p id="result"></p>
     </div>
@@ -73,21 +73,24 @@
         function updateThumbColor(value) {
             let thumbColor;
 
-            if (value >= 45 && value <= 55) {
+            if (value >= 75) {
+                // Dark Blue
+                thumbColor = `rgb(0, 0, 139)`; // Dark Blue
+            } else if (value >= 50 && value < 75) {
+                // Blue
+                thumbColor = `rgb(0, 0, 255)`; // Blue
+            } else if (value >= 35 && value < 50) {
                 // Yellow
                 thumbColor = `rgb(255, 255, 0)`; // Yellow
-            } else if (value >= 30 && value < 45) {
+            } else if (value >= 25 && value < 35) {
                 // Orange
                 thumbColor = `rgb(255, 165, 0)`; // Orange
-            } else if (value >= 10 && value < 30) {
-                // Light Red
-                thumbColor = `rgb(255, 102, 102)`; // Light Red
-            } else if (value < 10) {
-                // Dark Red
-                thumbColor = `rgb(255, 0, 0)`; // Dark Red
+            } else if (value >= 10 && value < 25) {
+                // Red
+                thumbColor = `rgb(255, 0, 0)`; // Red
             } else {
-                // Default (Blue)
-                thumbColor = `rgb(0, 0, 255)`; // Blue
+                // Dark Red
+                thumbColor = `rgb(139, 0, 0)`; // Dark Red
             }
 
             slider.style.setProperty('--thumb-color', thumbColor);
