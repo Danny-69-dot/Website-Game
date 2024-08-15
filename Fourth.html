@@ -58,7 +58,7 @@
 <body>
     <div class="container">
         <h1>Pilih angka kesukaan jesen</h1>
-        <input type="range" id="slider" min="1" max="500" value="500">
+        <input type="range" id="slider" min="1" max="500" value="1">
         <p>Angka saat ini: <span id="slider-value">1</span></p>
         <p id="result"></p>
     </div>
@@ -67,34 +67,30 @@
         const slider = document.getElementById('slider');
         const sliderValue = document.getElementById('slider-value');
         const result = document.getElementById('result');
-        const correctNumber = 69;
+        const correctNumber = 69; // Set the correct number here
         let timer;
 
         function updateThumbColor(value) {
+            const distance = Math.abs(value - correctNumber);
             let thumbColor;
 
-            if (value >= 75) {
-                // Dark Blue
+            if (distance >= 75) {
                 thumbColor = `rgb(0, 0, 139)`; // Dark Blue
-            } else if (value >= 50 && value < 75) {
-                // Blue
+            } else if (distance >= 50) {
                 thumbColor = `rgb(0, 0, 255)`; // Blue
-            } else if (value >= 35 && value < 50) {
-                // Yellow
+            } else if (distance >= 35) {
                 thumbColor = `rgb(255, 255, 0)`; // Yellow
-            } else if (value >= 25 && value < 35) {
-                // Orange
+            } else if (distance >= 25) {
                 thumbColor = `rgb(255, 165, 0)`; // Orange
-            } else if (value >= 10 && value < 25) {
-                // Red
+            } else if (distance >= 10) {
                 thumbColor = `rgb(255, 0, 0)`; // Red
             } else {
-                // Dark Red
                 thumbColor = `rgb(139, 0, 0)`; // Dark Red
             }
 
             slider.style.setProperty('--thumb-color', thumbColor);
-            slider.style.background = `linear-gradient(90deg, ${thumbColor} ${value}%, #ddd ${value}%)`;
+            slider.style.background = `linear-gradient(90deg, ${thumbColor} 100%, #ddd 0%)`;
+            slider.style.backgroundClip = 'content-box';
         }
 
         slider.addEventListener('input', () => {
