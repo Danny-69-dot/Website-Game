@@ -58,8 +58,8 @@
 <body>
     <div class="container">
         <h1>Pilih angka kesukaan jesen</h1>
-        <input type="range" id="slider" min="0" max="1000" value="1">
-        <p>Angka saat ini: <span id="slider-value">0</span></p>
+        <input type="range" id="slider" min="1" max="500" value="1">
+        <p>Angka saat ini: <span id="slider-value">1</span></p>
         <p id="result"></p>
     </div>
 
@@ -71,14 +71,27 @@
         let timer;
 
         function updateThumbColor(value) {
-            const distance = Math.abs(value - correctNumber);
-            const maxDistance = 85;
-            const percentage = Math.max(0, Math.min(1, (maxDistance - distance) / maxDistance));
-            const red = Math.round(percentage * 255);
-            const blue = 255 - red;
-            const thumbColor = `rgb(${red}, 0, ${blue})`;
+            let thumbColor;
+
+            if (value >= 45 && value <= 55) {
+                // Yellow
+                thumbColor = `rgb(255, 255, 0)`; // Yellow
+            } else if (value >= 30 && value < 45) {
+                // Orange
+                thumbColor = `rgb(255, 165, 0)`; // Orange
+            } else if (value >= 10 && value < 30) {
+                // Light Red
+                thumbColor = `rgb(255, 102, 102)`; // Light Red
+            } else if (value < 10) {
+                // Dark Red
+                thumbColor = `rgb(255, 0, 0)`; // Dark Red
+            } else {
+                // Default (Blue)
+                thumbColor = `rgb(0, 0, 255)`; // Blue
+            }
 
             slider.style.setProperty('--thumb-color', thumbColor);
+            slider.style.background = `linear-gradient(90deg, ${thumbColor} ${value}%, #ddd ${value}%)`;
         }
 
         slider.addEventListener('input', () => {
