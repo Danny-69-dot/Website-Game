@@ -28,33 +28,38 @@
             margin: 20px 0;
             -webkit-appearance: none;
             appearance: none;
-            height: 15px;
-            background: linear-gradient(to right, blue, red);
+            height: 10px;
+            background-color: #ddd;
             outline: none;
             opacity: 0.7;
             transition: opacity 0.2s;
+            border-radius: 5px;
         }
         #slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
             width: 25px;
             height: 25px;
-            background: #4CAF50;
+            border-radius: 50%;
+            background: blue;
             cursor: pointer;
+            transition: background 0.3s;
         }
         #slider::-moz-range-thumb {
             width: 25px;
             height: 25px;
-            background: #4CAF50;
+            border-radius: 50%;
+            background: blue;
             cursor: pointer;
+            transition: background 0.3s;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Pilih angka kesukaan Jesen</h1>
-        <input type="range" id="slider" min="1" max="100" value="1">
-        <p>Angka saat ini: <span id="slider-value">1</span></p>
+        <h1>Pilih angka kesukaan jesen</h1>
+        <input type="range" id="slider" min="0" max="1000" value="1">
+        <p>Angka saat ini: <span id="slider-value">0</span></p>
         <p id="result"></p>
     </div>
 
@@ -62,20 +67,25 @@
         const slider = document.getElementById('slider');
         const sliderValue = document.getElementById('slider-value');
         const result = document.getElementById('result');
-        const correctNumber = 15;
+        const correctNumber = 69;
         let timer;
 
-        function updateGradient(value) {
-            const percentage = Math.abs((value - correctNumber) / 85) * 100;
-            const gradientColor = `linear-gradient(to right, blue ${100 - percentage}%, red ${percentage}%)`;
-            slider.style.background = gradientColor;
+        function updateThumbColor(value) {
+            const distance = Math.abs(value - correctNumber);
+            const maxDistance = 85;
+            const percentage = Math.max(0, Math.min(1, (maxDistance - distance) / maxDistance));
+            const red = Math.round(percentage * 255);
+            const blue = 255 - red;
+            const thumbColor = `rgb(${red}, 0, ${blue})`;
+
+            slider.style.setProperty('--thumb-color', thumbColor);
         }
 
         slider.addEventListener('input', () => {
             const value = parseInt(slider.value);
             sliderValue.textContent = value;
 
-            updateGradient(value);
+            updateThumbColor(value);
 
             if (value == correctNumber) {
                 if (!timer) {
@@ -91,7 +101,7 @@
             }
         });
 
-        updateGradient(slider.value);
+        updateThumbColor(slider.value);
     </script>
 </body>
 </html>
