@@ -24,39 +24,15 @@
             margin-top: 20px;
         }
         #slider {
-            -webkit-appearance: none;
             width: 100%;
-            height: 15px;
-            background: linear-gradient(to right, darkblue, blue, yellow, orange, red, darkred);
-            border-radius: 10px;
-            outline: none;
-            opacity: 0.7;
-            transition: opacity 0.2s;
-        }
-        #slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: darkblue;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        #slider::-moz-range-thumb {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: darkblue;
-            cursor: pointer;
-            transition: background 0.2s;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Pilih angka kesukaan jesen</h1>
-        <input type="range" id="slider" min="1" max="500" value="1">
+        <input type="range" id="slider" min="1" max="100" value="1">
         <p>Angka saat ini: <span id="slider-value">1</span></p>
         <p id="result"></p>
     </div>
@@ -65,46 +41,21 @@
         const slider = document.getElementById('slider');
         const sliderValue = document.getElementById('slider-value');
         const result = document.getElementById('result');
-        const correctNumber = 69;
+        let timer;
 
         slider.addEventListener('input', () => {
-            const value = parseInt(slider.value);
-            sliderValue.textContent = value;
-
-            if (value >= correctNumber) {
-                const diff = Math.abs(correctNumber - value);
-                if (diff <= 0) {
-                    slider.style.background = "darkred";
-                    slider.style.setProperty('--thumb-color', 'darkred');
-                } else if (diff <= 10) {
-                    slider.style.background = "red";
-                    slider.style.setProperty('--thumb-color', 'red');
-                } else if (diff <= 25) {
-                    slider.style.background = "orange";
-                    slider.style.setProperty('--thumb-color', 'orange');
-                } else if (diff <= 35) {
-                    slider.style.background = "yellow";
-                    slider.style.setProperty('--thumb-color', 'yellow');
-                } else if (diff <= 50) {
-                    slider.style.background = "blue";
-                    slider.style.setProperty('--thumb-color', 'blue');
-                } else {
-                    slider.style.background = "darkblue";
-                    slider.style.setProperty('--thumb-color', 'darkblue');
+            sliderValue.textContent = slider.value;
+            if (slider.value == 69) {
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        result.textContent = 'Bener!';
+                        // Redirect to the next page after correct number is held for 3 seconds
+                        window.location.href = 'https://danny-69-dot.github.io/Website-Game/third.html';
+                    }, 100); // 0.1 seconds
                 }
             } else {
-                slider.style.background = "darkblue";
-                slider.style.setProperty('--thumb-color', 'darkblue');
-            }
-
-            slider.style.background = `linear-gradient(to right, darkblue ${correctNumber * 100 / 500}%, darkred ${correctNumber * 100 / 500}%)`;
-
-            if (value == correctNumber) {
-                result.textContent = 'Bener!';
-                setTimeout(() => {
-                    window.location.href = 'https://danny-69-dot.github.io/Website-Game/third.html';
-                }, 3000); // Redirect after 3 seconds
-            } else {
+                clearTimeout(timer);
+                timer = null;
                 result.textContent = 'Salah!';
             }
         });
