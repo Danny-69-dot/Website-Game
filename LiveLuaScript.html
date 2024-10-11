@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lua Script Host</title>
+    <title>Lua Script Updater</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,8 +38,8 @@
 </head>
 <body>
 
-    <h1>Live Lua Script Editor</h1>
-    <p>Type your Lua script below and click "Update Script" to save it. You can use the raw script URL in your Roblox game.</p>
+    <h1>Lua Script Updater</h1>
+    <p>Type your Lua script below and click "Update Script" to save it.</p>
 
     <textarea id="luaScript" placeholder="Enter your Lua script here..."></textarea>
     <br>
@@ -47,17 +47,16 @@
 
     <div class="output">
         <h2>Script URL:</h2>
-        <p>Use the following URL in your Roblox game to fetch the script:</p>
+        <p>Access the script at:</p>
         <code id="scriptUrl"></code>
     </div>
 
     <script>
         function updateScript() {
-            var luaScript = document.getElementById("luaScript").value;
-            var blob = new Blob([luaScript], { type: "text/plain" });
-            var url = URL.createObjectURL(blob);
-            
-            document.getElementById("scriptUrl").textContent = url;
+            const luaScript = document.getElementById("luaScript").value;
+            const scriptBlob = new Blob([luaScript], { type: "text/plain" });
+            const scriptUrl = URL.createObjectURL(scriptBlob);
+            document.getElementById("scriptUrl").textContent = scriptUrl;
         }
     </script>
 
