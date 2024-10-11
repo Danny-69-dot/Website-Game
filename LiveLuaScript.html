@@ -3,62 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lua Script Updater</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        textarea {
-            width: 100%;
-            height: 300px;
-            margin-bottom: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .output {
-            margin-top: 20px;
-            background-color: #fff;
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
-    </style>
+    <title>Live Lua Script</title>
 </head>
 <body>
-
-    <h1>Lua Script Updater</h1>
-    <p>Type your Lua script below and click "Update Script" to save it.</p>
-
-    <textarea id="luaScript" placeholder="Enter your Lua script here..."></textarea>
-    <br>
-    <button onclick="updateScript()">Update Script</button>
-
-    <div class="output">
-        <h2>Script URL:</h2>
-        <p>Access the script at:</p>
-        <code id="scriptUrl"></code>
-    </div>
-
+    <h1>Enter Lua Script</h1>
+    <textarea id="luaScript" rows="10" cols="50">print("hi")</textarea>
+    <button onclick="submitScript()">Submit Script</button>
+    
     <script>
-        function updateScript() {
-            const luaScript = document.getElementById("luaScript").value;
-            const scriptBlob = new Blob([luaScript], { type: "text/plain" });
-            const scriptUrl = URL.createObjectURL(scriptBlob);
-            document.getElementById("scriptUrl").textContent = scriptUrl;
+        function submitScript() {
+            // Store the Lua script in a global variable
+            const luaCode = document.getElementById("luaScript").value;
+            localStorage.setItem("ScriptToExecute", luaCode); // Store the script locally
         }
     </script>
-
 </body>
 </html>
