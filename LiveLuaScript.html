@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lua Script Host</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .output {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Live Lua Script Editor</h1>
+    <p>Type your Lua script below and click "Update Script" to save it. You can use the raw script URL in your Roblox game.</p>
+
+    <textarea id="luaScript" placeholder="Enter your Lua script here..."></textarea>
+    <br>
+    <button onclick="updateScript()">Update Script</button>
+
+    <div class="output">
+        <h2>Script URL:</h2>
+        <p>Use the following URL in your Roblox game to fetch the script:</p>
+        <code id="scriptUrl"></code>
+    </div>
+
+    <script>
+        function updateScript() {
+            var luaScript = document.getElementById("luaScript").value;
+            var blob = new Blob([luaScript], { type: "text/plain" });
+            var url = URL.createObjectURL(blob);
+            
+            document.getElementById("scriptUrl").textContent = url;
+        }
+    </script>
+
+</body>
+</html>
