@@ -3,19 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Lua Script</title>
+    <title>Live Lua Script Receiver</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #pingOutput { white-space: pre-wrap; }
+    </style>
 </head>
 <body>
-    <h1>Enter Lua Script</h1>
-    <textarea id="luaScript" rows="10" cols="50">print("hi")</textarea>
-    <button onclick="submitScript()">Submit Script</button>
-    
+    <h1>Received Pings</h1>
+    <div id="pingOutput">Waiting for pings...</div>
+
     <script>
-        function submitScript() {
-            // Store the Lua script in a global variable
-            const luaCode = document.getElementById("luaScript").value;
-            localStorage.setItem("ScriptToExecute", luaCode); // Store the script locally
+        // Simulating receiving pings by changing the content of the div
+        const pingOutput = document.getElementById('pingOutput');
+
+        // Function to handle the simulated ping reception
+        function receivePing(character) {
+            pingOutput.textContent += character;  // Append the received character
         }
+
+        // Simulate pings for demonstration (you won't use this in actual usage)
+        function simulatePings() {
+            const characters = "cat";
+            for (let char of characters) {
+                setTimeout(() => receivePing(char), 1000 * characters.indexOf(char));  // Simulate timing
+            }
+        }
+
+        // Uncomment to simulate pings (for testing)
+        // simulatePings();
     </script>
 </body>
 </html>
