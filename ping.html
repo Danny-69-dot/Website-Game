@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ping Detector</title>
+</head>
+<body>
+    <h1>Ping Detector</h1>
+    <p id="ping-status">Waiting for ping...</p>
+
+    <script>
+        // Function to check ping status from the server
+        async function checkPing() {
+            try {
+                const response = await fetch('/ping-status');
+                const data = await response.json();
+                document.getElementById('ping-status').textContent = data.status;
+            } catch (error) {
+                console.error('Error fetching ping status:', error);
+            }
+        }
+
+        // Check for ping every 5 seconds
+        setInterval(checkPing, 5000);
+    </script>
+</body>
+</html>
